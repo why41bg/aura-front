@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// const NOTE_API_BASE_URL = process.env.NOTE_API;
-const NOTE_API_BASE_URL = "http://localhost:8081/api/notes";
+const NOTE_API_BASE_URL = process.env.NOTE_API;
 
 const getAllPublish = async () => {
   const response = await axios.get(NOTE_API_BASE_URL + "/publish");
