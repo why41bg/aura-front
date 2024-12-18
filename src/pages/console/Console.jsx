@@ -53,7 +53,7 @@ const Console = () => {
       <CssBaseline enableColorScheme />
       <Box sx={{ display: "flex" }}>
         <SideMenu changeMainContent={changeMainContent} />
-        <AppNavbar />
+        <AppNavbar changeMainContent={changeMainContent} />
         {/* Main content */}
         <Box
           component="main"

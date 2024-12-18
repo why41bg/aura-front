@@ -27,7 +27,7 @@ const Toolbar = styled(MuiToolbar)({
   },
 });
 
-export default function AppNavbar() {
+export default function AppNavbar({ changeMainContent }) {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -75,6 +75,7 @@ export default function AppNavbar() {
           <SideMenuMobile
             open={open}
             toggleDrawer={toggleDrawer}
+            changeMainContent={changeMainContent}
           />
         </Stack>
       </Toolbar>

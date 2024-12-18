@@ -9,7 +9,7 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
 import MenuContent from "./MenuContent";
 
-function SideMenuMobile({ open, toggleDrawer }) {
+function SideMenuMobile({ open, toggleDrawer, changeMainContent }) {
   return (
     <Drawer
       anchor="right"
@@ -42,7 +42,7 @@ function SideMenuMobile({ open, toggleDrawer }) {
         </Stack>
         <Divider />
         <Stack sx={{ flexGrow: 1 }}>
-          <MenuContent />
+          <MenuContent changeMainContent={changeMainContent} />
           <Divider />
         </Stack>
         <Stack sx={{ p: 2 }}>
