@@ -1,7 +1,7 @@
-import Note from "./Note";
-import Header from "./Header";
+import Note from "./components/Note";
+import Header from "./components/Header";
 import { useState, useEffect } from "react";
-import noteService from "../services/noteService";
+import noteService from "../../services/noteService";
 import "./Home.css";
 
 const Home = () => {
@@ -13,7 +13,6 @@ const Home = () => {
       try {
         const initNotes = await noteService.getAllPublish();
         setNotes(initNotes);
-        // Randomly select a note to display at the beginning
         if (initNotes.length > 0) {
           const randomIndex = Math.floor(Math.random() * initNotes.length);
           setNoteIdx(randomIndex);
