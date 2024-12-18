@@ -17,11 +17,12 @@ const MainGrid = ({ data }) => {
         spacing={2}
         columns={12}
         sx={{ mb: (theme) => theme.spacing(2) }}>
-        {data.map((noteContent, index) => (
+        {data.map((note, index) => (
           <Grid
             key={index}
-            size={{ xs: 12, sm: 6, lg: 4 }}>
-            <NoteCard noteContent={noteContent} />
+            size={{ xs: 12, sm: 6, lg: 4 }}
+            maxHeight={150}>
+            <NoteCard initNote={note} />
           </Grid>
         ))}
       </Grid>

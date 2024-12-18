@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { alpha } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -12,38 +11,38 @@ import MainGrid from "./components/MainGrid";
 import noteService from "../../services/noteService";
 
 const Console = () => {
-  const [notes, setNotes] = React.useState([]);
+  const [initNotes, setInitNotes] = React.useState([]);
   const [notesToDisplay, setNotesToDisplay] = React.useState([]);
   const changeMainContent = (index) => {
     if (index === 1) {
       noteService.getAllDraft().then((notes) => {
-        setNotes(notes);
+        setInitNotes(notes);
         setNotesToDisplay(notes);
       });
     } else if (index === 2) {
       noteService.getAllPublish().then((notes) => {
-        setNotes(notes);
+        setInitNotes(notes);
         setNotesToDisplay(notes);
       });
     } else if (index === 3) {
       noteService.getAllHidding().then((notes) => {
-        setNotes(notes);
+        setInitNotes(notes);
         setNotesToDisplay(notes);
       });
     } else if (index === 4) {
       noteService.getAllRecycle().then((notes) => {
-        setNotes(notes);
+        setInitNotes(notes);
         setNotesToDisplay(notes);
       });
     }
   };
   const filterNotes = (searchValue) => {
     if (searchValue === "") {
-      setNotesToDisplay(notes);
+      setNotesToDisplay(initNotes);
       return;
     }
-    const filteredNotes = notes.filter((note) => {
-      return note.includes(searchValue);
+    const filteredNotes = initNotes.filter((note) => {
+      return note.content.includes(searchValue);
     });
     setNotesToDisplay(filteredNotes);
   };

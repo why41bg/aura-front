@@ -12,11 +12,12 @@ const Home = () => {
     const fetchNotes = async () => {
       try {
         const initNotes = await noteService.getAllPublish();
-        setNotes(initNotes);
+        const initNotesContent = initNotes.map((note) => note.content);
+        setNotes(initNotesContent);
         if (initNotes.length > 0) {
           const randomIndex = Math.floor(Math.random() * initNotes.length);
           setNoteIdx(randomIndex);
-          setNote(initNotes[randomIndex]);
+          setNote(initNotesContent[randomIndex]);
         }
       } catch (error) {
         console.error("Error fetching notes:", error);
