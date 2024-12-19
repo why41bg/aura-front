@@ -16,14 +16,15 @@ const mainListItems = [
   { text: "Draft", icon: <DraftsIcon /> },
   { text: "Publish", icon: <ArticleIcon /> },
   { text: "Hiding", icon: <VisibilityOffIcon /> },
-  { text: "Recycle", icon: <DeleteIcon /> },
 ];
 
+const secondaryListItems = [{ text: "Recycle", icon: <DeleteIcon /> }];
+
 export default function MenuContent({ changeMainContent }) {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const handleListItemClick = (index) => {
-    setSelectedIndex(index);
-    changeMainContent(index);
+  const [selected, setSelected] = React.useState("Home");
+  const handleListItemClick = (text) => {
+    setSelected(text);
+    changeMainContent(text);
   };
 
   return (
@@ -35,8 +36,32 @@ export default function MenuContent({ changeMainContent }) {
             disablePadding
             sx={{ display: "block" }}>
             <ListItemButton
-              selected={selectedIndex === index}
-              onClick={() => handleListItemClick(index)}
+              selected={selected === item.text}
+              onClick={() => handleListItemClick(item.text)}
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "rgba(0, 0, 0, 0.08)",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "rgba(0, 0, 0, 0.15)",
+                },
+              }}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+
+      <List dense>
+        {secondaryListItems.map((item, index) => (
+          <ListItem
+            key={index}
+            disablePadding
+            sx={{ display: "block" }}>
+            <ListItemButton
+              selected={selected === item.text}
+              onClick={() => handleListItemClick(item.text)}
               sx={{
                 "&.Mui-selected": {
                   backgroundColor: "rgba(0, 0, 0, 0.08)",

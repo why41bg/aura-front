@@ -7,36 +7,41 @@ import AppNavbar from "./components/AppNavbar";
 import Header from "./components/Header";
 import SideMenu from "./components/SideMenu";
 import MainGrid from "./components/MainGrid";
+import NoteInputs from "./components/NoteInputs";
 
 import noteService from "../../services/noteService";
 
 const Console = () => {
   const [initNotes, setInitNotes] = React.useState([]);
   const [notesToDisplay, setNotesToDisplay] = React.useState([]);
-  const changeMainContent = (index) => {
-    if (index === 1) {
+  const [openInputs, setOpenInputs] = React.useState(true);
+  const changeMainContent = (text) => {
+    if (text === "Draft") {
       noteService.getAllDraft().then((notes) => {
         setInitNotes(notes);
         setNotesToDisplay(notes);
+        setOpenInputs(false);
       });
-    } else if (index === 2) {
+    } else if (text === "Publish") {
       noteService.getAllPublish().then((notes) => {
         setInitNotes(notes);
         setNotesToDisplay(notes);
+        setOpenInputs(false);
       });
-    } else if (index === 3) {
+    } else if (text === "Hiding") {
       noteService.getAllHidding().then((notes) => {
         setInitNotes(notes);
         setNotesToDisplay(notes);
+        setOpenInputs(false);
       });
-    } else if (index === 4) {
+    } else if (text === "Recycle") {
       noteService.getAllRecycle().then((notes) => {
         setInitNotes(notes);
         setNotesToDisplay(notes);
+        setOpenInputs(false);
       });
     } else {
-      setInitNotes([]);
-      setNotesToDisplay([]);
+      setOpenInputs(true);
     }
   };
   const filterNotes = (searchValue) => {
@@ -80,11 +85,17 @@ const Console = () => {
               pb: 5,
               mt: { xs: 8, md: 0 },
             }}>
-            <Header filterNotes={filterNotes} />
-            <MainGrid
-              data={notesToDisplay}
-              onDelete={onDelete}
+            <Header
+              filterNotes={filterNotes}
+              openInputs={openInputs}
             />
+            {openInputs && <NoteInputs />}
+            {!openInputs && (
+              <MainGrid
+                data={notesToDisplay}
+                onDelete={onDelete}
+              />
+            )}
           </Stack>
         </Box>
       </Box>

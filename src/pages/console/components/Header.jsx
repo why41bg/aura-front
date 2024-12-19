@@ -2,7 +2,7 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Search from "./Search";
 
-export default function Header({ filterNotes }) {
+export default function Header({ filterNotes, openInputs }) {
   return (
     <Stack
       direction="row"
@@ -18,7 +18,7 @@ export default function Header({ filterNotes }) {
       <Stack
         direction="row"
         sx={{ gap: 1 }}>
-        <Search filterNotes={filterNotes} />
+        {!openInputs && <Search filterNotes={filterNotes} />}
       </Stack>
     </Stack>
   );

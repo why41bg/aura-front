@@ -28,14 +28,14 @@ const getAllRecycle = async () => {
 
 const updateNoteContent = async (noteId, content) => {
   const response = await axios.put(NOTE_API_BASE_URL + "/content/" + noteId, {
-    update_content: content,
+    content: content,
   });
   return response.data.code === 100;
 };
 
 const updateNoteState = async (noteId, state) => {
   const response = await axios.put(NOTE_API_BASE_URL + "/state/" + noteId, {
-    update_state: state,
+    state: state,
   });
   return response.data.code === 100;
 };
@@ -45,4 +45,11 @@ const logicalDeleteNote = async (noteId) => {
   return response.data.code === 100;
 };
 
-export default { getAllPublish, getAllDraft, getAllHidding, getAllRecycle, updateNoteContent, updateNoteState, logicalDeleteNote };
+const createNote = async (content) => {
+  const response = await axios.post(NOTE_API_BASE_URL + "/", {
+    content: content,
+  });
+  return response.data.code === 100;
+};
+
+export default { getAllPublish, getAllDraft, getAllHidding, getAllRecycle, updateNoteContent, updateNoteState, logicalDeleteNote, createNote };
