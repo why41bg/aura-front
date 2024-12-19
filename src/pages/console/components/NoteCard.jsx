@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import NoteDialog from "./NoteDialog";
 
-function NoteCard({ initNote }) {
+function NoteCard({ initNote, onDelete }) {
   const [note, setNote] = React.useState(initNote);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -14,7 +14,7 @@ function NoteCard({ initNote }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const onUpdate = (updateContent) => {
+  const onUpdateContent = (updateContent) => {
     setNote({
       ...note,
       content: updateContent,
@@ -34,12 +34,18 @@ function NoteCard({ initNote }) {
           </Typography>
         </Cardcontent>
       </CardActionArea>
-      <NoteDialog
-        open={open}
-        handleClose={handleClose}
-        note={note}
-        onUpdate={onUpdate}
-      />
+      {note.state !== 3 ? (
+        <NoteDialog
+          open={open}
+          handleClose={handleClose}
+          note={note}
+          onUpdateContent={onUpdateContent}
+          onDelete={onDelete}
+        />
+      ) : (
+        // TODO: 添加恢复回收站笔记功能
+        <></>
+      )}
     </Card>
   );
 }

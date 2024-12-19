@@ -34,6 +34,9 @@ const Console = () => {
         setInitNotes(notes);
         setNotesToDisplay(notes);
       });
+    } else {
+      setInitNotes([]);
+      setNotesToDisplay([]);
     }
   };
   const filterNotes = (searchValue) => {
@@ -41,10 +44,18 @@ const Console = () => {
       setNotesToDisplay(initNotes);
       return;
     }
-    const filteredNotes = initNotes.filter((note) => {
-      return note.content.includes(searchValue);
-    });
-    setNotesToDisplay(filteredNotes);
+    setNotesToDisplay(
+      initNotes.filter((note) => {
+        return note.content.includes(searchValue);
+      })
+    );
+  };
+  const onDelete = (noteId) => {
+    setNotesToDisplay(
+      notesToDisplay.filter((note) => {
+        return note.id !== noteId;
+      })
+    );
   };
 
   return (
@@ -70,7 +81,10 @@ const Console = () => {
               mt: { xs: 8, md: 0 },
             }}>
             <Header filterNotes={filterNotes} />
-            <MainGrid data={notesToDisplay} />
+            <MainGrid
+              data={notesToDisplay}
+              onDelete={onDelete}
+            />
           </Stack>
         </Box>
       </Box>
